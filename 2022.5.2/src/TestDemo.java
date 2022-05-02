@@ -26,7 +26,7 @@ public class TestDemo {
         System.out.println(e);
 
     }
-    public static int fac(int num) {
+    public static int fac1(int num) {
         //求某个数的阶乘
         int sum = 1;
         for (int i = 1; i <= num; i++) {
@@ -44,7 +44,7 @@ public class TestDemo {
         int n = scanner.nextInt();
         int sum = 0 ;
         for (int i = 1; i <=n; i++) {
-            sum += fac(i);
+            sum += fac1(i);
         }
         System.out.println(sum);
 
@@ -120,6 +120,83 @@ public class TestDemo {
 
 
     }
+
+    public static void main5(String[] args) {
+        /**
+         * 求斐波那契数列的第n项。(迭代实现)
+         */
+
+
+    }
+    public static int fac2(int num) {
+        if(num == 1) {
+            return 1;
+        }
+        int tmp = num * fac2(num-1);
+        return tmp;
+
+    }
+
+    public static void main6(String[] args) {
+        /**
+         * 利用递归完成N的阶乘
+         */
+        int result = fac2(4);
+        System.out.println(result);
+
+
+    }
+
+    public static void print(int n) {
+        /**
+         * 按顺序打印一个数字的每一位数
+         */
+        if(n<10) {
+            System.out.println(n);
+        }else {
+            print(n / 10);
+            System.out.println(n % 10);
+
+        }
+
+    }
+    public static void main7(String[] args) {
+
+        print(123);
+    }
+    public static int fib(int n) {
+        if(n==1 || n==2) {
+            return 1;
+        }
+        int tmp =fib(n-1)+fib(n-2);
+        return tmp;
+    }
+    public static int SumPrint(int n) {
+        /**
+         * 写一个递归方法，输入一个非负整数，
+         * 返回组成它的数字之和
+         */
+        int sum=0;
+        //eg 1279   1+2+7+9=19
+        if(n<10) {
+            return n;
+        }else{
+
+            SumPrint(n/10);
+            sum+=n%10;
+
+        }
+        return sum;
+
+    }
+
+    public static void main(String[] args) {
+        int sum = SumPrint(1279);
+        System.out.println(sum);
+
+    }
+
+
 
 
 }
