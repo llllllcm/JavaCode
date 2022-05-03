@@ -96,9 +96,22 @@ public class TestDemo {
         System.out.println(sum);
 
     }
-    
+    public static int Fac(int n) {
+
+        if (n==0){
+            return 1;
+        }
+        int ret = n*Fac(n-1);
+        return ret;
+
+
+    }
+
 
     public static void main(String[] args) {
+        int ret = Fac(4);
+        System.out.println(ret);
+
 
     }
 
