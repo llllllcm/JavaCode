@@ -33,6 +33,9 @@ class WashMachine{
 
 }
 class Dog{
+    public int age;
+    public char yan;
+    public boolean flag;
     public String name;//名字
     public String color;//颜色
     //狗的属性
@@ -41,8 +44,13 @@ class Dog{
     }
     //狗的行为
     public void wag(){
-        System.out.println(name+":摇尾巴~~~");
+        System.out.println(name+ ":摇尾巴~~~");
     }
+    public void show(){
+        System.out.println("姓名："+name+" 颜色 "+color);
+    }
+
+
 }
 
 public class Test {
@@ -55,18 +63,31 @@ public class Test {
     }*/
     //定义一个类(不一定都由成员变量和方法构成)
 
-        public static void main(String[] args) {
+        public static void main1(String[] args) {
             Dog dog = new Dog(); //通过new实例化对象
             dog.name = "阿黄";
             dog.color = "黑黄";
             dog.barks();
             dog.wag();
-            Dog dogs = new Dog();
-            dogs.name = "阿黄";
-            dogs.color = "黑黄";
-            dogs.barks();
-            dogs.wag();
+
+
+
         }
+
+    public static void main(String[] args) {
+        Dog dog = new Dog();//通过new实例化一个对象
+        dog.name = "初一";
+        System.out.println(dog.name);
+        System.out.println(dog.color);
+        System.out.println(dog.age);
+        System.out.println(dog.flag);
+        System.out.println(dog.yan);
+        dog.wag();
+        dog.show();
+
+
+
+    }
 
 
 
