@@ -125,6 +125,8 @@ public class Test {
          * 实现一个方法 transform, 以数组为参数, 循环将数组中的每个元素 乘以 2 ,
          * 并设置到对应的数组元素上. 例如 原数组为 {1, 2, 3}, 修改之后为 {2, 4, 6}
          */
+        //可以分为两个方法这题：
+        //1、对数组本身进行修改  2、生成另外一个数组。对其进行修改
         int[] array = new int[]{1,2,3,4};
         transform(array);
         System.out.println(Arrays.toString(array));
@@ -161,7 +163,7 @@ public class Test {
         int[] result = new int[2];
 
         for (int i = 0; i < nums.length; i++) {
-            for (int j = 0; j < nums.length; j++) {
+            for (int j = i + 1; j < nums.length; j++) {
                 if (nums[i] + nums[j] == target) {
                     result[0] = i;
                     result[1] = j;
@@ -224,26 +226,41 @@ public class Test {
         System.out.println(Arrays.toString(copy));
 
     }
-    public static void isOrder(int temp[]){
+
+    /**
+     * 函数尽量不要打印，这种判断应该用boolean类型来写
+     * @param temp
+     */
+    public static boolean isOrder(int temp[]){
         int i = 0;
         for ( i = 0; i < temp.length-1; i++) {
             if (temp[i]>temp[i+1]){
-                System.out.println("不是递增数列");
-                break;
+               return false;
             }
         }
-        if(i == temp.length-1){
-            System.out.println("是递增数列");
-        }
-
+       return true;
     }
+//    public static void isOrder(int temp[]){
+//        int i = 0;
+//        for ( i = 0; i < temp.length-1; i++) {
+//            if (temp[i]>temp[i+1]){
+//                System.out.println("不是递增数列");
+//                break;
+//            }
+//        }
+//        if(i == temp.length-1){
+//            System.out.println("是递增数列");
+//        }
+//
+//    }
 
-    public static void main13(String[] args) {
+    public static void main(String[] args) {
         /**
          * 给定一个整型数组, 判定数组是否有序（递增
          */
         int[] arr = new int[]{1,2,4,5};
-        isOrder(arr);
+        System.out.println(isOrder(arr));
+
     }
     public static int binaryFind(int[] temp,int toFind) {
         int left = 0;
@@ -320,7 +337,7 @@ public class Test {
 
     }
 
-    public static void main(String[] args) {
+    public static void main13(String[] args) {
         int[] array = new int[]{1, 2, 3, 4, 5, 6};
         int[] copy = array.clone();//产生一个副本
         System.out.println(Arrays.toString(copy));
