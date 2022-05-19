@@ -1,5 +1,7 @@
 package polymorphism;
 
+import java.beans.FeatureDescriptor;
+
 /**
  * Created with IntelliJ IDEA.
  * Description:
@@ -14,6 +16,7 @@ class Animal{
     public Animal(String name, int age) {
         this.name = name;
         this.age = age;
+        eat();
     }
 
     public String getName() {
@@ -32,7 +35,7 @@ class Animal{
         this.age = age;
     }
     public void eat(){
-        System.out.println(name + "正在吃饭！");
+        System.out.println(name + "正在吃饭！(animal)");
     }
 
     @Override
@@ -53,7 +56,7 @@ class Dog extends Animal{
 
     @Override
     public void eat() {
-        super.eat();
+        System.out.println(getName()+"正在吃狗粮");
     }
 }
 class Bird extends Animal{
@@ -64,18 +67,23 @@ class Bird extends Animal{
     public void fly(){
         System.out.println(getName()+"正在飞");
     }
+
     public void eat(){
         System.out.println(getName()+"要吃鸟粮");
     }
 }
 public class Test {
+    public static void main(String[] args) {
+        //Animal animal = new Animal("动物",10);
+        Dog dog = new Dog("狗子",10);
+    }
     public static void main3(String[] args) {
         Animal animal = new Bird("鹦鹉",2);
         Bird bird = (Bird)animal;//父类类型给子类类型了
         bird.fly();
     }
 
-    public static void main(String[] args) {
+    public static void main4(String[] args) {
          Animal animal = new Dog("狗子",10);
          if(animal instanceof Bird){
           Bird bird = (Bird)animal;
