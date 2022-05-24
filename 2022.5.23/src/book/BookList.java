@@ -26,7 +26,7 @@ public class BookList {
      */
     //给一个下标，然后就会返回这个下标所对应的一本书
     public Book getBooks(int pos) {
-        return books[pos-1];
+        return books[pos];
     }
 
     /**
@@ -35,7 +35,10 @@ public class BookList {
      * @param book 我们要放的书
      */
     public void setBooks(int pos,Book book){
-        books[pos - 1] = book;
+        books[pos] = book;
+    }
+    public void setBooksNull(int pos){
+        books[pos] = null;
     }
 
     /**
@@ -43,6 +46,9 @@ public class BookList {
      * @return
      */
     public int getUsedSize(){
+        return usedSize;
+    }
+    public int setUsedSize(int usedSize){
         return usedSize;
     }
 
