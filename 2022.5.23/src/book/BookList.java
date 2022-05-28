@@ -48,8 +48,8 @@ public class BookList {
     public int getUsedSize(){
         return usedSize;
     }
-    public int setUsedSize(int usedSize){
-        return usedSize;
+    public void setUsedSize(int sz){
+        usedSize = sz;
     }
 
 

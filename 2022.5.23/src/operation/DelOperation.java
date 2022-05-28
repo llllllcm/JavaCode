@@ -25,8 +25,9 @@ public class DelOperation implements IOperation{
             Book book1 = bookList.getBooks(i);
             Book book2 = bookList.getBooks(i + 1);
             if (book1.getName().equals(name)) {
-                if (i <= currentSize - 1) {
+                if (i == currentSize - 1) {
                     bookList.setBooksNull(i);
+                    System.out.println("删除成功");
                 } else {
                     while (i < currentSize){
                     bookList.setBooks(i, book2);
@@ -34,6 +35,7 @@ public class DelOperation implements IOperation{
 
                 }
                 }
+                System.out.println("删除成功");
                 break;
             }
 

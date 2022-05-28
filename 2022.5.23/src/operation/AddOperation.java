@@ -21,10 +21,12 @@ public class AddOperation implements IOperation {
         String name = scanner.nextLine();
         System.out.println("请输入图书的作者: ");
         String author = scanner.nextLine();
-        System.out.println("请输入图书的类型: ");
-        String type = scanner.nextLine();
         System.out.println("请输入图书的价格: ");
         int price = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("请输入图书的类型: ");
+        String type = scanner.nextLine();
+
 
         Book book = new Book(name,author,price,type);
 
