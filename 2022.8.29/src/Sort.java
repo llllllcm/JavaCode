@@ -36,7 +36,28 @@ public class Sort {
              */
             arr[j+1] = tmp;
         }
+    }
 
+    /**
+     * 选择排序
+     *    时间复杂度  O(N^2)
+     *    空间复杂度  O(1)
+     *    不稳定的排序
+     * @param arr
+     */
+    public static void selectSort(int[] arr){
+        int mindIndex = 0;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i+1; j < arr.length; j++) {
+                if (arr[j] < arr[i]){
+                    mindIndex = j;
+                }
+            }
+            Swap(arr,i,mindIndex);
+            arr[i] = arr[mindIndex];
+        }
+    }
+    public static void Swap(int[] arr,int index1,int index2){
 
     }
 }
