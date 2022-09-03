@@ -24,8 +24,33 @@ class Student{
     }
 }
 public class Test {
+    public static void main19(String[] args) {
+        String s = "hello";
+
+        for (int i = 0; i < 100; i++) {
+            s += "world";
+        }
+        System.out.println(s);
+    }
+    public static void main33(String[] args) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.reverse();
+        stringBuilder.append("hello ");
+        stringBuilder.append("world");
+        String s = stringBuilder.toString();
+        System.out.println(s);
+        System.out.println("====================");
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append("hello ");
+        stringBuffer.append("world");
+        String s1 = stringBuffer.toString();
+        System.out.println(s);
+    }
     public static void main(String[] args) {
+        
         String str = "        hello world    ";
+        str.indexOf("i");
         System.out.println(str);
         String s = "hello&WORLD";
         System.out.println(s.toLowerCase());
