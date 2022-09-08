@@ -140,23 +140,23 @@ public class TestLinkedList {
 
     //删除所有值为key的节点
     public void removeAllKey(int key) {
-
-
         Node cur = head.next;
         Node prev = head;
-        while (cur.next != null) {
-            if (cur.val == key) {
+        //这时只能是cur ！= null 作为判断条件 因为如果是在只有一个头节点的情况下
+        //: cur.next != null 这个条件会引发空指针异常
+        while (cur != null) {
+            if(cur.val == key) {
                 prev.next = cur.next;
-                cur = cur.next;
             }else {
                  prev = cur;
-                 cur =cur.next;
             }
+            cur = cur.next;
         }
-
-
+        //如果是放在前面的话 就会存在出现新的头结点的情况()
+        if(head.val == key) {
+            head = head.next;
+        }
     }
-
     //得到单链表的长度
     public int size() {
         Node cur = this.head;
@@ -168,6 +168,9 @@ public class TestLinkedList {
         return count;
     }
 
+    /**
+     * 清空数据
+     */
     public void clear() {
 
     }
@@ -179,11 +182,10 @@ public class TestLinkedList {
         System.out.println("====================");
         testLinkedList.addLast(1);
         testLinkedList.addLast(2);
-        testLinkedList.addLast(3);
+        testLinkedList.addLast(33);
         testLinkedList.addIndex(1,33);
-        testLinkedList.remove(2);
-        testLinkedList.remove(33);
-        testLinkedList.remove(1);
+
+        testLinkedList.removeAllKey(33);
         testLinkedList.display();
         System.out.println(testLinkedList.size());
         System.out.println(testLinkedList.contains(33));
