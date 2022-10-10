@@ -108,35 +108,115 @@ public class TestLinkedList {
         return false;
 
     }
+    import java.util.*;
+
+    /*
+    public class ListNode {
+        int val;
+        ListNode next = null;
+
+        ListNode(int val) {
+            this.val = val;
+        }
+    }*/
+    public class PalindromeList {
+        public boolean chkPalindrome(ListNode head) {
+            // write code here
+            //大体思路: 1、找到中间结点
+            // 2、翻转链表 3、判断回文
+            if(head == null) return true;
+            ListNode slow = head;
+            ListNode fast = head;
+            // 找到中间结点
+            while(fast != null && fast.next != null) {
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+            //翻转链表
+            ListNode cur = slow.next;
+            while(cur != null) {
+                ListNode curNext = cur.next;
+                cur.next = slow;
+                slow = cur;
+                cur = curNext;
+            }
+            //判断回文
+            while(head != slow) {
+                if(head.val == slow.val) {
+                    head = head.next;
+                    slow = slow.next;
+                }else if(head.next == slow){
+                    return true;
+                }else {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
     //删除第一次出现关键字为key的节点
     //删除结点的话 其核心其实就是将这个结点的前驱 修改为其他结点的地址
+//    public Node checkKeyIndex(int key) {
+//        Node cur = this.head;
+//        //这里需要使用cur.next 来判断 因为 如果让cur来判断的话 cur最终会遍历完这个链表
+//        //后续在判断cur.next.val == key时会造成空指针异常
+//        while(cur.next != null) {
+//            //判断下一个的值是不是要找的值，是的话 放回这个值所对应结点的前驱
+//            if(cur.next.val == key) {
+//                return cur;
+//            }
+//            cur = cur.next;
+//        }
+//        return null;
+//    }
     public Node checkKeyIndex(int key) {
-        Node cur = this.head;
-        //这里需要使用cur.next 来判断 因为 如果让cur来判断的话 cur最终会遍历完这个链表
-        //后续在判断cur.next.val == key时会造成空指针异常
+        Node cur = head;
+        //这里使用cur.next 是为了避免空指针访问异常
         while(cur.next != null) {
-            //判断下一个的值是不是要找的值，是的话 放回这个值所对应结点的前驱
-            if(cur.next.val == key) {
-                return cur;
-            }
-            cur = cur.next;
+             if(cur.next.val == key) {
+                 return cur;
+             }
         }
         return null;
+
     }
     public void remove(int key) {
+        // 判断头的数据域是否为需要寻找的值
         if(head.val == key) {
             head = head.next;
             return;
         }
-        Node cur = checkKeyIndex(key);
-        if (cur == null) {
-            System.out.println("找不到这个关键字");
+        Node prevDel = checkKeyIndex(key);
+        if(prevDel == null) {
+            System.out.println("找不到这个元素");
         }
-        Node del = cur.next;
-        cur.next = del.next;
-        //cur.next = cur.next.next;
-
+        Node del = prevDel.next;
+        prevDel.next = del.next;
+        //上两行代码也可以用这行替换： prevDel = prevDel.next.next;
     }
+
+
+
+
+
+
+
+
+
+//    public void remove(int key) {
+//        if(head.val == key) {
+//            head = head.next;
+//            return;
+//        }
+//        Node cur = checkKeyIndex(key);
+//        if (cur == null) {
+//            System.out.println("找不到这个关键字");
+//        }
+//        Node del = cur.next;
+//        cur.next = del.next; //这时因为这个要删除的元素没有被引用，所以被自动释放了。
+//        //或者写为 : cur.next = cur.next.next;
+//
+//    }
 
     //删除所有值为key的节点
     public void removeAllKey(int key) {
