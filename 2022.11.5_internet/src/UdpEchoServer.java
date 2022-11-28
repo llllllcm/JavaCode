@@ -22,7 +22,7 @@ public class UdpEchoServer {
         //这里使用while循环的原因是因为，服务器不知道客户端什么时候发送请求，所以需要严阵以待。
         while(true) {
             //循环里面处理一次请求
-            // 1. 读取请求并且分析
+            // 1. 读取请求
             //这里的字节数组大小可任意。
             DatagramPacket requestPacket = new DatagramPacket(new byte[4096],4096);
             //需要注意的是这里receive方法的参数，是个输出型参数，调用receive的时候，需要手动的传入一个空的
