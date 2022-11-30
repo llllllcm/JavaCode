@@ -44,52 +44,6 @@ class Solution2 {
         return left;
     }
 }
-
-class Solution3 {
-    //在排序数组中查找元素的第一个和最后一个位置
-    public int[] searchRange(int[] nums, int target) {
-        int first = searchRangeSon(nums, target, true);
-        int last = searchRangeSon(nums, target, false);
-        if (first == -1 && last == -1){
-            return new int[]{-1,-1};
-        } else {
-            return new int[]{first,last};
-        }
-    }
-    public int searchRangeSon(int[] nums, int target, boolean first) {
-        int left = 0,right = nums.length-1;
-        while (left <= right){
-            int mid = (left + right) / 2;
-            if (nums[mid] == target){
-                if (first){
-                    //寻找第一个target
-                    if ((mid - 1 >= left && nums[mid - 1] != target) || (mid - 1 < left)){
-                        //如果当前位置的左边元素已经越界，或者左边元素不等于当前元素，说明已经找到第一个target
-                        return mid;
-                    } else if (mid - 1 >= left && nums[mid - 1] == target){
-                        //如果当前位置的左边元素等于当前元素，继续往左边寻找第一个target
-                        right = mid - 1;
-                    }
-                } else {
-                    //寻找最后一个target
-                    if ((mid + 1 <= right && nums[mid + 1] != target) || (mid + 1 > right)){
-                        //如果当前位置的右边元素已经越界，或者右边元素不等于当前元素，说明已经找到最后一个target
-                        return mid;
-                    } else if (mid + 1 <= right && nums[mid + 1] == target){
-                        //如果当前位置的右边元素等于当前元素，继续往右边寻找最后一个target
-                        left = mid + 1;
-                    }
-                }
-            } else if (nums[mid] > target){
-                right = mid - 1;
-            } else {
-                left = mid + 1;
-            }
-        }
-        return -1;
-    }
-}
-
 public class binary {
 
     public static void main(String[] args) {
@@ -97,3 +51,4 @@ public class binary {
         System.out.println(arr.length);
     }
 }
+
