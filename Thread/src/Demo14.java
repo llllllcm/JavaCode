@@ -24,6 +24,7 @@ public class Demo14 {
                 count.increase();
             }
         });
+
         t1.start();
         t2.start();
         t1.join();
