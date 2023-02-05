@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Created with IntelliJ IDEA.
@@ -151,6 +153,111 @@ public class BinaryTree {
             return node2;
         }
         return null;
+    }
+    //判断两棵树是否相同
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        //先判断两个是否其中有一个为空
+        if(p == null && q != null || p != null && q== null) {
+            return false;
+        }
+        if(p == null & q == null) {
+            return true;
+        }
+        //第一个if和第三个if不能放在一起，因为可能造成空指针异常。
+        if(p.val != q.val ) {
+            return false;
+        }
+        return isSameTree(p.left,q.left) && isSameTree(q.right,p.right);
+    }
+    //判断图中的树是否为另一颗树的子树
+    public boolean isSubtree(TreeNode root, TreeNode subRoot) {
+
+        return isSubtree(root.left,subRoot.left) && isSubtree(root.right,subRoot.right);
+    }
+    //判断树是否为平衡二叉树
+    public boolean isBalanced(TreeNode root) {
+        if(root == null) return true;
+        int left = getHeight(root.left);
+        int right = getHeight(root.right);
+        return Math.abs(left - right) <= 1 && isBalanced(root.left) && isBalanced(root.right);
+    }
+    //时间复杂度进行优化
+    public int maxDepth(TreeNode root) {
+        if(root == null) return 0;
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
+        if (left >= 0 && right>= 0 && Math.abs(left - right) <= 1) {
+            return Math.max(left,right) + 1;
+        }else {
+            return -1;
+        }
+    }
+    public boolean isBalanced2(TreeNode root) {
+        if(root == null) return true;
+        return maxDepth(root) >= 0;
+    }
+
+    /**
+     * 是否为对称树
+     * @param root
+     * @return
+     */
+    public boolean isSymmetric(TreeNode root) {
+        return isSymmetricChild(root.left,root.right) ;
+    }
+    private boolean isSymmetricChild(TreeNode leftTree,TreeNode rightTree) {
+        if(leftTree == null && rightTree != null) return false;
+        if(leftTree != null && rightTree == null) return false;
+        if(leftTree == null && rightTree == null) return true;
+        if(leftTree.val != rightTree.val) return false;
+        //执行到这一步说明值是一样的，并且不为空
+        return isSymmetricChild(leftTree.left,rightTree.right) && isSymmetricChild(leftTree.right,rightTree.left);
+    }
+
+    void levelOrder1(TreeNode root) {
+        if(root == null) return;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            TreeNode cur = queue.poll();
+            System.out.println(cur.val + " ");
+            if(cur.left != null) {
+                queue.offer(cur.left);
+            }
+            if (cur.right != null) {
+                queue.offer(cur.right);
+            }
+        }
+    }
+
+    /**
+     * 层序遍历 非递归
+     * @param root
+     * @return
+     */
+
+    public List<List<Integer>> levelOrder2(TreeNode root) {
+        List<List<Integer>> ret = new LinkedList<>();
+        if(root == null) return ret;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> row = new ArrayList<>();
+            while(size > 0) {
+                size--;
+                TreeNode cur = queue.poll();
+                row.add((int) cur.val);
+                if(cur.left != null) {
+                    queue.offer(cur.left);
+                }
+                if (cur.right != null) {
+                    queue.offer(cur.right);
+                }
+            }
+            ret.add(row);
+        }
+        return ret;
     }
 
 }
