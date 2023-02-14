@@ -170,7 +170,7 @@ public class BinaryTree {
         return isSameTree(p.left,q.left) && isSameTree(q.right,p.right);
     }
     //判断图中的树是否为另一颗树的子树
-    public boolean isSubtree(TreeNode root, TreeNode subRoot) {
+    public boolean isSubtree (TreeNode root, TreeNode subRoot) {
 
         return isSubtree(root.left,subRoot.left) && isSubtree(root.right,subRoot.right);
     }
