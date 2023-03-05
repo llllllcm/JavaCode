@@ -497,7 +497,7 @@ public class Sort {
         for (int i = 0; i < count.length; i++) {
             //确保当前count数组可以打印完成
             while (count[i] != 0) {
-                num[index = i+minVal;
+                num[index] = i+minVal;
                 index++;
                 count[i]--;
             }

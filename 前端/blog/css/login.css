@@ -1,0 +1,47 @@
+/* 这个文件是登录页面 */
+.login-container {
+    width: 100%;
+    height: calc(100% - 50px);
+    color: rgb(128,0,0);
+    /* 为了让对话框可以垂直水平居中，使用弹性布局 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-dialog {
+    width: 400px;
+    height: 360px;
+    background-color: rgba(247, 244, 244, 0.8);
+    border-radius: 10px;
+}
+.login-dialog h3 {
+    text-align:center;
+    padding: 50px;
+}
+.login-dialog .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+.login-dialog .row span {
+    width: 60px;
+    font-size: 16px;
+}
+#username, #password {
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+}
+#submit {
+    width: 260px;
+    height: 40px;
+    border: none;
+    background-color: rgb(91, 160, 204);
+    border-radius: 10px;
+}
+#submit:active {
+    background-color: #666;
+}

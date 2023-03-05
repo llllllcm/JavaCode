@@ -1,0 +1,136 @@
+/* 写样式的默认格式，先去除浏览器的公共样式，并且
+设置border-box,避免元素盒子被内边框和边距增大 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,body {
+    /* html 是页面的最顶层的元素，高度100% 是相对于父元素来说高度是 100%
+    对于html标签来说，父元素就是浏览器的窗口，浏览器的窗口多高，html就多高
+    body 的父亲是 html，设为100%意思是 body和 html一样高
+    
+    如果不设置高度，此时元素的默认高度取决于内部的内容。
+    */
+    height: 100%;
+}
+
+body {
+    background-image: url("../img/空1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+.nav {
+    /* 设置宽度与父元素一样宽 */
+    /* 块级元素来说，默认就是width：100% */
+    width: 100%;
+    /* 设置高度为50px */
+    height: 50px;
+    background-color: rgba(50,50,50,0.4);
+    color: white;
+
+    /* 导航栏里面的元素都是水平排列的，弹性布局来设置 */
+    display: flex;
+    /* 锤子方向子元素居中 */
+    align-items: center;
+    
+
+}
+.nav img {
+    width: 40px;
+    height: 40px;
+    margin-left: 30px;
+    margin-right: 10px;
+    /* 把内切圆半径设置为宽度的一半，就正好是一个圆形 */
+    border-radius: 50%;
+}
+.nav a {
+    color: white;
+    text-decoration: none;
+    /* 为了让这几个a标签不要贴的那么紧凑，加上个内边距，此处使用外
+    边距也行，内边距更好，内边距也是元素的内容，可以增大用户的点击
+    的面积
+    */
+
+    padding: 0 10px;
+}
+
+.nav .spacer {
+    width: 80%;
+}
+
+/* 编写页面主题 */
+.container {
+    /* 设置主体部分宽度 1000px*/
+    width: 1000px;
+    /* 高度能够填充整个页面 */
+    height: calc(100% - 50px);
+    /* 水平居中 */
+    margin: 0 auto;
+    /* 临时加的 */
+    /* background-color: blue; */
+    /* 弹性布局 */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container-left {
+    /* 这里的尺寸写百分数，是相对于父元素为基准,所以不需要在额外
+    写一个减去50px */
+    height: 100%;
+    width: 200px;
+    /* background-color: red; */
+}
+.container-right {
+    height: 100%;
+    width: 795px;
+
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    /* 让这个元素自己带上滚动条 */
+    /* auto的意思是 如果内容溢出，加上滚动条，
+    如果没有溢出，不加滚动条 */
+    overflow: auto;
+
+}
+/* 左侧用户信息 */
+.card {
+    background-color: rgba(255,255,255,0.8);
+    border-radius: 10px;
+    /* 设置内边距，让内容和边框之间有点距离 */
+    padding: 30px;
+}
+/* 用户头像 */
+.card img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+}
+/* 用户名字 */
+.card h3 {
+    /* 让文字水平居中 */
+    text-align: center;
+    /* 让文字和上下都有边距 */
+    /* 这里使用内外边距均可*/
+    padding: 10px 10px 0 10px;
+}
+/* 用户的github链接 */
+.card a {
+    /* 因为我们的的a标签是行内元素，所以
+    text-align: center这行代码没有作用，必须配合使用
+     display: block才行*/
+    text-align: center;
+    /* 将行内元素转换为块级元素 */
+    display: block;
+    color: #777;
+    text-decoration: none;
+    padding: 10px;
+}
+.card .counter {
+    /* 让里面的元素水平排列，使用弹性布局 */
+    display: flex;
+    justify-content: space-around;
+    padding: 5px;
+}
