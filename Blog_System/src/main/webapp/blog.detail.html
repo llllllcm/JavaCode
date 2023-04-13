@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客详情页</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/blog.detail.css">
+    <link rel="stylesheet" href="editor.md/css/editormd.min.css">
+    <link rel="icon" href="favicon.ico">
+
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="nav">
+        <img src="img/头像.jpg" alt="">
+        <span class="title">我的博客系统</span>
+        <div class="spacer"></div>
+        <a href="blog.list.html">主页</a>
+        <a href="blog.edit.html">写博客</a>
+        <a href="logoutServlet">注销</a>
+        <a href="#" id="delete_button">删除</a>
+    </div>
+    <!-- 页面主体部分 -->
+    <div class="container">
+        <!-- 左侧信息 -->
+        <div class="container-left">
+            <!-- 使用.card 表示用户信息 -->
+            <div class="card">
+                <!-- 用户头像 -->
+                <img src="img/狗头.jpg" alt="">
+                <!-- 用户名 -->
+                <h3>小白</h3>
+                <a href="#">github 地址</a>
+                <div class="counter">
+                    <span>文章</span>
+                    <span>分类</span>
+                </div>
+                <div class="counter">
+                    <span>2</span>
+                    <span>1</span>
+                </div>
+            </div>
+        </div>
+        <!-- 右侧信息 -->
+        <div class="container-right">
+            <!-- 博客标题 -->
+            <h3 class="title"></h3>
+            <!-- 博客发布时间 -->
+            <div class="date"></div>
+            <!-- 博客正文 ，为了配合editormd进行格式转换，此处我们需要设置div的id属性-->
+            <div id="content">
+                
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <!-- 引入editor的依赖，需要保证的是editor的js加载需要依赖于jquery的依赖 -->
+    <script src="editor.md/lib/marked.min.js"></script>
+    <script src="editor.md/lib/prettify.min.js"></script>
+    <script src="editor.md/editormd.js"></script>
+    <script>
+        $.ajax({
+            type: 'get',
+            url: 'blogServlet' + location.search,
+            success: function(body) {
+                // 处理响应结束，此时的body 就是表示一个博客的js对象
+                // 1.跟新标题
+                let titleDiv = document.querySelector('.container-right .title');
+                titleDiv.innerHTML = body.title;
+                // 2.跟新日期
+                let dateDiv = document.querySelector('.date');
+                dateDiv.innerHTML = body.postTime;
+                // 3.跟新博客正文
+                // 此处不应该直接把博客正文填充到这个标签中
+                editormd.markdownToHTML('content',{ markdown: body.content });
+            }
+        })
+        function checkLogin() {
+            $.ajax({
+                type:'get',
+                url: 'loginServlet',
+                success:function(body) {
+                    if(body.userId && body.userId > 0) {
+                        //登录成功
+                        console.log("当前用户已经登录！！");
+                    } else {
+                        //当前未登录
+                        //强制跳转到登录页面
+                        location.assign('login.html');
+                    }
+                }
+            });
+        }
+        checkLogin();
+        //函数定义
+        function getAuthor() {
+            $.ajax({
+                type:'get',
+                url:'authorServlet'+location.search,
+                success: function(body) {
+                    //把username 设置到界面上
+                    let h3 = document.querySelector('.container-left .card h3');
+                    h3.innerHTML = body.username;
+                }
+            });
+        }
+        //函数调用
+        getAuthor();
+        //约定 只有自己可以删除自己的博客。不能删除别人的博客（不考虑管理员的情况）
+        
+        //这里需要带上博客id，因为其在后端找到对应的博客对象。
+        function updateDeleteURL() {
+            let deleteButton = document.querySelector("#delete_button");
+            deleteButton.href = "deleteServlet" + location.search;
+        }
+        updateDeleteURL();
+
+    </script>
+
+</body>
+</html> 

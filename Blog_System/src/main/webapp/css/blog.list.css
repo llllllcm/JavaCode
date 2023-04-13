@@ -1,0 +1,48 @@
+/* 这个文件是给博客列表页实现样式的 */
+
+/* 设置整个博客容器元素的样式 */
+.blog {
+    width: 100%;
+    padding: 20px;
+}
+.blog .title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    padding: 10px 10px 0 10px;
+}
+.blog .date {
+    text-align: center;
+    color: rgb(37, 148, 69);
+    padding: 10px;
+}
+.blog .desc {
+    text-indent: 2em;
+    line-height: 30px;
+    text-align: justify;
+}
+.blog a {
+    /* a标签不方便设置样式，先转换为块级元素 */
+    display: block;
+    width: 120px;
+    height: 40px;
+    /* 设置水平居中 */
+    margin: 20px auto 0 auto;
+    /* 设置边框 */
+    border: 2px solid black;
+    /* 让文字水平居中 */
+    text-align: center;
+    /* 让文字垂直居中 */
+    line-height: 40px;
+    /* 去掉下划线 */
+    text-decoration: none;
+    /* 文字改成黑色 */
+    color: black;
+    /* 增加一个过度效果 */
+    transition:all 0.7s;
+}
+/* 让鼠标划到按钮上有一个变化*/
+.blog a:hover {
+    color: white;
+    background: #666;
+}

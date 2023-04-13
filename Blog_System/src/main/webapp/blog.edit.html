@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客编辑页</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/blog.edit.css">
+    <script src="js/jquery.min.js"></script>
+    <!-- 引入editor.md 的依赖 -->
+    <link rel="stylesheet" href="editor.md/css/editormd.min.css">
+    <script src="editor.md/lib/marked.min.js"></script>
+    <script src="editor.md/lib/prettify.min.js"></script>
+    <script src="editor.md/editormd.js"></script>
+    <link rel="icon" href="favicon.ico">
+    <!--  -->
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="nav">
+        <img src="img/头像.jpg" alt="">
+        <span class="title">我的博客系统</span>
+        <div class="spacer"></div>
+        <a href="blog.list.html">主页</a>
+        <a href="blog.edit.html">写博客</a>
+        <a href="logoutServlet">注销</a>
+    </div>
+    <!-- 创建一个编辑区的容器 -->
+    <div class="blog-edit-container">
+        <form action="blogServlet" method="post" style="height: 100%;">
+            <!-- 博客标题编辑器 -->
+            <div class="title">
+                <input type="text" id="title" placeholder="输入文章标题" name="title">
+                <input type="submit" id="submit" value="发布文章">
+            </div>
+            <!-- 博客编辑器，这里用id是为了和markdown编辑器对接，而设置的 -->
+            <div id="editor">
+                <!-- editor md 对于form表单也是支持的，就是可以在form里放一个隐藏的textarea
+                这样editor.md就会自动把用户输入的markdown内容填写到textarea中，然后用户一点击submit就会自动提交 -->
+                <!-- 这里的 display: none 就是让这个textarea存在而不显示-->
+                <textarea name="content" style="display: none"></textarea>
+            </div>
+        </form>
+    </div>
+    <script>
+        // 这里的第一个参数editor要与上面div标签中的id属性相同（这是定性要求，无需纠结），代表的含义是这个编译器要放在哪个div中
+        var editor = editormd("editor", {
+            // 这里的尺寸必须在这里设置，设置样式会被editor 自动覆盖掉
+            width: "100%",
+            // 设置编译器高度
+            height: "calc(100% - 50px)",
+            // 编译器中的初始内容
+            markdown: "# 在这里写下一篇博客",
+            // 指定 editor.md 依赖的插件路径
+            path: "editor.md/lib/" 
+        });
+        function checkLogin() {
+            $.ajax({
+                type:'get',
+                url: 'loginServlet',
+                success:function(body) {
+                    if(body.userId && body.userId > 0) {
+                        //登录成功
+                        console.log("当前用户已经登录！！");
+                    } else {
+                        //当前未登录
+                        //强制跳转到登录页面
+                        location.assign('login.html');
+                    }
+                }
+            });
+        }
+        checkLogin();
+    </script>
+    
+
+</body>
+</html>
