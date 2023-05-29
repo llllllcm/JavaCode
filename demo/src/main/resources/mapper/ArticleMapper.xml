@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ArticleMapper">
+    <select id="getDetail" resultType="com.example.demo.entity.vo.ArticleInfoVO">
+        select a.*,u.username from articleinfo a
+        left join userinfo u on u.id=a.uid
+        where a.id=#{id}
+    </select>
+    
+    <select id="getListByUid" resultType="com.example.demo.entity.vo.ArticleInfoVO">
+        select a.*,u.username from articleinfo a
+        left join userinfo u on u.id=a.id
+        where a.uid=#{uid}
+    </select>
+</mapper>

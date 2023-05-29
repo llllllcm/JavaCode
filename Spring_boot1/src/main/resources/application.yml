@@ -1,0 +1,9 @@
+# 主配置文件
+spring:
+  profiles:
+    active: dev,test
+student:
+  id: 1
+  name: zhangsan
+  age: 19
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UserMapper">
+
+    <select id="getAll" resultType="com.example.demo.entity.UserEntity">
+        select * from userinfo
+    </select>
+
+    <select id="getAllByIdOrder" resultType="com.example.demo.entity.UserEntity">
+        select * from userinfo order by id ${ord}
+    </select>
+
+    <select id="getUserById" resultType="com.example.demo.entity.UserEntity">
+        select * from userinfo where id = #{uid}
+    </select>
+
+    <select id="getUserByUserName" resultType="com.example.demo.entity.UserEntity">
+        select * from userinfo where username = '${username}'
+    </select>
+
+    <select id="login" resultType="com.example.demo.entity.UserEntity">
+        select * from userinfo where username= '${username}' and password='${password}'
+    </select>
+
+    <update id="updatePassword">
+        update userinfo set password=#{newPassword}
+        where id=#{id} and password=#{password}
+    </update>
+
+    <delete id="delById" >
+        delete from userinfo where id=#{id}
+    </delete>
+
+    <insert id="addUser">
+        insert into userinfo(username,password) values(#{username},#{password})
+    </insert>
+    <resultMap id="BaseMap" type="com.example.demo.entity.UserEntity">
+        <id property="id" column="id"></id>
+        <result property="username" column="username"></result>
+        <result property="pwd" column="password"></result>
+        <result property="createTime" column="createtime"></result>
+    </resultMap>
+    <select id="getListByName" resultMap="BaseMap">
+        select * from userinfo where username like concat('%',#{username},'%')
+    </select>
+
+<!--    <select id="getListByName" resultType="com.example.demo.entity.UserEntity">-->
+<!--        select id,username,password as pwd from userinfo where username like concat('%',#{username},'%')-->
+<!--    </select>-->
+</mapper>
