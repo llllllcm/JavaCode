@@ -4,6 +4,7 @@ import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,5 +57,27 @@ public class UserController {
         }
         return user;
     }
+
+    @GetMapping("/userInfo")
+    @ResponseBody
+    public Object getUserInfo(HttpServletRequest req) {
+        //1.先从请求中获取会话
+        HttpSession session = req.getSession(false);
+        if (session == null) {
+            //会话不存在，用户尚未登录，此时返回一个空的对象即可
+            System.out.println("[getUserInfo] 当前获取不到 session 对象");
+            return new User();
+        }
+        //2.从会话中获取到之前保存的用户对象
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            System.out.println("[getUserInfo] 当前获取不到 user 对象");
+            return new User();
+        }
+        user.setPassword("");
+        return user;
+    }
+
+
 
 }

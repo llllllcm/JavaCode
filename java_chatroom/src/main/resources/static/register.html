@@ -4,39 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>登录界面</title>
+    <title>注册界面</title>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-    <!-- 导航栏 -->
-    <div class="nav">
-        网页聊天
-    </div>
-    <!-- 主窗口区 -->
-    <div class="login-container">
-        <div class="login-dialog" >
-            <h3>登录</h3>
-            <div class="row">
-                <span>用户名</span>
-                <input type="text" id="username">
-            </div>
-            <div class="row" id="p">
-                <span>密码</span>
-                <input type="password" id="password">
-            </div>
-            <div class="error">
-                <span id="error" class="error"></span>
-            </div>
-            <div class="submit">
-                <button id="submit">登录</button>
-            </div>
+<!-- 导航栏 -->
+<div class="nav">
+    网页聊天
+</div>
+<!-- 主窗口区 -->
+<div class="login-container">
+    <div class="login-dialog" >
+        <h3>注册</h3>
+        <div class="row">
+            <span>用户名</span>
+            <input type="text" id="username">
+        </div>
+        <div class="row" id="p">
+            <span>密码</span>
+            <input type="password" id="password">
+        </div>
+        <div class="error">
+            <span id="error" class="error"></span>
+        </div>
+        <div class="submit">
+            <button id="submit">注册</button>
         </div>
     </div>
-    <!-- 引入jQuery -->
-    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-    <!-- 实现前后端交互的逻辑 -->
-    <script>
+</div>
+<!-- 引入jQuery -->
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<!-- 实现前后端交互的逻辑 -->
+<script>
         // 在登录验证失败时触发的函数
         function showError(message) {
             var errorMessage = document.getElementById('error');
@@ -50,19 +50,19 @@
 
         const errorMessage = document.getElementById('nullerror');
         submitButton.onclick = function() {
-            
+
             //1. 先获取到输入框中的内容
             let username = document.querySelector('#username').value;
             let password = document.querySelector('#password').value;
             if(username == '' || password == '') {
                 if(!flag) {
                     showError('用户名或者密码不能为空');
-                } 
+                }
                 return;
             }
             //2.再发送ajax请求进行登录
             $.ajax({
-                url:'/login',
+                url:'/register',
                 type:'post',
                 data: {
                     username: username,
@@ -73,10 +73,11 @@
                     //此处的body 相当于响应的user对象，
                     if(body && body.userId > 0) {
                         //登录成功
-                        location.assign('/client.html');
+                        alert("注册成功！")
+                        location.assign('/login.html');
                     }else {
                         if(!errorFlag) {
-                            showError('账户或者密码输入错误');
+                            showError('注册失败');
                         }
                     }
                 }

@@ -11,6 +11,7 @@
  .nav {
     height: 50px;
     background-color: rgb(50, 50, 50);
+    /* 文字颜色 */
     color: rgb(255, 255, 255);
     /* 使用弹性布局，让导航栏内部元素，垂直居中 */
     display: flex;

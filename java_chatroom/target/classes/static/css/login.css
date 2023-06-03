@@ -1,8 +1,0 @@
-/* 放置登录页面的专属样式 */
-.login-contaier {
-    width: 100%;
-    /* 这里减号两边需要带有空格，不然无法识别 */
-    height: calc(100% - 50px);
-    display: flex;
-}
-
